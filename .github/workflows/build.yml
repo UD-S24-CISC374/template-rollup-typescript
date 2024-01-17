@@ -4,9 +4,9 @@ name: Deploy dev build on main push
 on:
   # Runs on pushes targeting the default branch
   push:
-    branches: [main, 'alpha', 'beta', 'final']
+    branches: [main]
   pull_request:
-    branches: [main, 'alpha', 'beta', 'final']
+    branches: [main]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -54,22 +54,16 @@ jobs:
       # TODO: Set up linter
       # - run: npm run lint
       - name: Build
-        run: npm run build
+        run: |
+          npm run build
       - run: echo "<html><head><meta http-equiv='refresh' content='0; URL=${{github.server_url}}/${{github.repository}}' /></head><body>Redirecting to repository</body></html>" > ./dist/github.html
-      - name: Move to appropriate folder
-        run: mv dist ${GITHUB_REF##*/}
       - name: Setup Pages
         uses: actions/configure-pages@v3
-      - name: Download existing builds, if any
-        uses: actions/download-artifact@v2
-        with:
-          name: existing-builds
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
-          name: existing-builds
           # Upload entire repository
-          path: '.'
+          path: 'dist/'
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
