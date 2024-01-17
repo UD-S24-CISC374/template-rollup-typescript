@@ -46,6 +46,9 @@ jobs:
             file: package.json
             field: homepage
             value: ${{ steps.get-repo-values.outputs.url }}
+      - name: Install
+        run: |
+          npm install
       # TODO: Set up linter
       # - run: npm run lint
       - name: Build
