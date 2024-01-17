@@ -3,6 +3,7 @@ import commonjs from '@rollup/plugin-commonjs';
 import replace from '@rollup/plugin-replace';
 import terser from '@rollup/plugin-terser';
 import typescript from '@rollup/plugin-typescript';
+import copy from "rollup-plugin-copy";
 
 export default {
 
@@ -59,7 +60,14 @@ export default {
         typescript(),
 
         //  See https://github.com/rollup/plugins/tree/master/packages/terser for config options
-        terser()
+        terser(),
+
+        copy({
+            targets: [
+                { src: "src/index.html", dest: "dist" },
+                { src: "assets/**/*", dest: "dist/assets" },
+            ],
+        })
 
     ]
 };

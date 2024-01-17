@@ -3,6 +3,7 @@ import { nodeResolve } from '@rollup/plugin-node-resolve';
 import replace from '@rollup/plugin-replace';
 import serve from 'rollup-plugin-serve';
 import typescript from '@rollup/plugin-typescript';
+import copy from "rollup-plugin-copy";
 
 export default {
 
@@ -67,6 +68,13 @@ export default {
             headers: {
                 'Access-Control-Allow-Origin': '*'
             }
+        }),
+
+        copy({
+            targets: [
+                { src: "src/index.html", dest: "dist" },
+                { src: "assets/**/*", dest: "dist/assets" },
+            ],
         })
 
     ]

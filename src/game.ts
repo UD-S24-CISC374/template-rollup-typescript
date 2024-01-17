@@ -23,6 +23,8 @@ export default class Demo extends Phaser.Scene
 
         this.add.image(400, 300, 'libs');
 
+        this.add.text(0, 0, "CISC374 Version", { font: "48px Arial Bold", color: "white" });
+
         const logo = this.add.image(400, 70, 'logo');
 
         this.tweens.add({
